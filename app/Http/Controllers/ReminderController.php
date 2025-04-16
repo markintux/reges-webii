@@ -17,14 +17,16 @@ class ReminderController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * Exibe o formulário para a criação de um novo recurso.
      */
     public function create()
     {
-        //
+        return view('app.reminders.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * Armazena um novo recurso no banco de dados.
      */
     public function store(Request $request)
     {

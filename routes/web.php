@@ -1,16 +1,9 @@
 <?php
 
-use App\Models\Reminder;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReminderController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/reminder/{title}/{description}/', function ($title, $description) {
-    $date = now();
-    Reminder::create([
-        'title' => $title,
-        'description' => $description,
-    ]);
-});
+Route::resource('reminders', ReminderController::class);
