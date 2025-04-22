@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->dateTime('reminder_at');
+            $table->dateTime('remind_at');
             $table->boolean('done')->default(false);
             $table->timestamps();
         });

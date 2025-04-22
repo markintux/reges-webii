@@ -9,12 +9,12 @@ class Reminder extends Model
     protected $fillable = [
         'title',
         'description',
-        'reminder_at',
+        'remind_at',
         'done'
     ];
 
     protected $casts = [
-        'reminder_at' => 'datetime',
+        'remind_at' => 'datetime',
         'done' => 'boolean',
     ];
 
