@@ -9,10 +9,18 @@ class ReminderController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * Exibe uma lista de todos os recursos.
      */
     public function index()
     {
-        //
+        // busca todos os lembretes
+        // $reminders = Reminder::all();
+
+        // busca os lembretes com o método paginate
+        $reminders = Reminder::orderBy('remind_at', 'desc')->paginate(2);
+
+        // retorna a view com os lembretes
+        return view('app.reminders.index', compact('reminders'));
     }
 
     /**

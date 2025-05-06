@@ -14,7 +14,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('reminders.create') }}">Cadastrar</a></li>
-                        <li><a class="dropdown-item" href="#">Visualizar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('reminders.index') }}">Visualizar</a></li>
                     </ul>
                 </li>
             </ul>
