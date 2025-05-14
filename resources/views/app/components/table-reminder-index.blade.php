@@ -41,7 +41,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="#" class="btn btn-outline-primary">
+                                <a href="{{ route('reminders.edit', $reminder->id) }}" class="btn btn-outline-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>

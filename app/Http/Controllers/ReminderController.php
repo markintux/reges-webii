@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReminderRequest;
 use App\Models\Reminder;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,8 @@ class ReminderController extends Controller
      */
     public function index()
     {
-        // busca todos os lembretes
-        // $reminders = Reminder::all();
-
         // busca os lembretes com o método paginate
-        $reminders = Reminder::orderBy('remind_at', 'desc')->paginate(2);
+        $reminders = Reminder::orderBy('remind_at', 'desc')->paginate(3);
 
         // retorna a view com os lembretes
         return view('app.reminders.index', compact('reminders'));
@@ -36,34 +34,16 @@ class ReminderController extends Controller
      * Store a newly created resource in storage.
      * Armazena um novo recurso no banco de dados.
      */
-    public function store(Request $request)
+    public function store(ReminderRequest $request)
     {
-        // dump and die
-        //dd($request->all());
-
         // valida a requisição
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'remind_at' => 'required|date_format:Y-m-d\TH:i',
-            'done' => 'required|boolean',
-        ],[
-            'title.required' => 'O título é obrigatório.',
-            'title.string' => 'O título deve ser uma sequência de caracteres.',
-            'title.max' => 'O título deve ter no máximo 255 caracteres.',
-            'description.string' => 'A descrição deve ser uma sequência de caracteres.',
-            'remind_at.required' => 'A data e hora do lembrete são obrigatórias.',
-            'remind_at.date_format' => 'A data e hora do lembrete devem estar no formato AAAA-MM-DDThh:mm.',
-            'done.required' => 'O campo "feito" é obrigatório.',
-            'done.boolean' => 'O campo "feito" deve ser verdadeiro ou falso.',
-        ]);
+        $data = $request->validated();
 
         // cadastra no banco de dados
         Reminder::create($data);
 
         // redireciona em caso de sucesso
         return redirect()->route('reminders.create')->with('success', 'Lembrete cadastrado com sucesso!');
-
     }
 
     /**
@@ -79,15 +59,23 @@ class ReminderController extends Controller
      */
     public function edit(Reminder $reminder)
     {
-        //
+        // retorna a view com o lembrete
+        return view('app.reminders.edit', compact('reminder'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reminder $reminder)
+    public function update(ReminderRequest $request, Reminder $reminder)
     {
-        //
+        // valida a requisição
+        $data = $request->validated();
+
+        // atualiza o lembrete no banco de dados
+        $reminder->update($data);
+
+        // redireciona em caso de sucesso
+        return redirect()->route('reminders.edit', $reminder)->with('success', 'Lembrete atualizado com sucesso!');
     }
 
     /**
