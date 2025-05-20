@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ $reminder->id }}</td>
                             <td>
-                                <a href="#">
+                                <a href="{{ route('reminders.show', $reminder->id) }}">
                                     {{ $reminder->title }}
                                 </a>
                             </td>

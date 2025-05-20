@@ -51,7 +51,8 @@ class ReminderController extends Controller
      */
     public function show(Reminder $reminder)
     {
-        //
+        // retorna a view com o lembrete
+        return view('app.reminders.show', compact('reminder'));
     }
 
     /**
