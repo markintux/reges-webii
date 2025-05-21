@@ -12,6 +12,11 @@
     <div class="col">
         <div class="table-responsive">
             <h1 class="mb-5">Visualizar Lembretes</h1>
+            @if(session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
             @if($reminders->count())
                 <table class="table table-striped table-hover table-responsive">
                     <thead>

@@ -84,6 +84,29 @@ class ReminderController extends Controller
      */
     public function destroy(Reminder $reminder)
     {
-        //
+        // deleta o lembrete do banco de dados
+        $reminder->delete();
+
+        // redireciona em caso de sucesso
+        return redirect()->route('reminders.index')->with('success', 'Lembrete deletado com sucesso!');
     }
+
+    public function markAsDone(Reminder $reminder)
+    {
+        // marca o lembrete como feito
+        $reminder->update(['done' => true]);
+
+        // redireciona em caso de sucesso
+        return redirect()->back()->with('success', 'Lembrete marcado como concluído!');
+    }
+
+    public function markAsUndone(Reminder $reminder)
+    {
+        // marca o lembrete como não feito
+        $reminder->update(['done' => false]);
+
+        // redireciona em caso de sucesso
+        return redirect()->back()->with('success', 'Lembrete marcado como pendente!');
+    }
+
 }
