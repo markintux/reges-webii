@@ -3,6 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    @component('app.components.dashboard')
+    @component('app.components.dashboard', ['reminders' => $reminders, 'searchDate' => $searchDate])
     @endcomponent
 @endsection
