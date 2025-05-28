@@ -7,37 +7,39 @@
                 <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i> Filtrar</button>
             </div>
         </form>
-        @forelse($reminders as $reminder)
-            <div class="col-4 col-md-4 col-lg-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ route('reminders.show', $reminder->id) }}">
-                                {{ $reminder->title }}
-                            </a>
-                        </h5>
-                        <p class="card-text">{{ $reminder->description }}</p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                {{ $reminder->remind_at->format('d/m/Y H:i') }}
-                            </small>
-                        </p>
-                        <p>
-                            @if ($reminder->done)
-                                <span class="badge bg-success">Concluído</span>
-                            @else
-                                <span class="badge bg-warning">Pendente</span>
-                            @endif
-                        </p>
+        <div class="row">
+            @forelse($reminders as $reminder)
+                <div class="col-4 col-md-4 col-lg-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ route('reminders.show', $reminder->id) }}">
+                                    {{ $reminder->title }}
+                                </a>
+                            </h5>
+                            <p class="card-text">{{ $reminder->description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    {{ $reminder->remind_at->format('d/m/Y H:i') }}
+                                </small>
+                            </p>
+                            <p>
+                                @if ($reminder->done)
+                                    <span class="badge bg-success">Concluído</span>
+                                @else
+                                    <span class="badge bg-warning">Pendente</span>
+                                @endif
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="alert alert-info">
-                    Nenhum lembrete encontrado para a data selecionada.
+            @empty
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="alert alert-info">
+                        Nenhum lembrete encontrado para a data selecionada.
+                    </div>
                 </div>
-            </div>
-        @endforelse
+           @endforelse
+        </div>
     </div>
 </div>
