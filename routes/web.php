@@ -19,5 +19,7 @@ Route::middleware('auth')
         Route::patch('reminders/{reminder}/done', [ReminderController::class, 'markAsDone'])->name('reminders.done');
         Route::patch('reminders/{reminder}/undone', [ReminderController::class, 'markAsUndone'])->name('reminders.undone');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/profile/edit', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('/profile', [UserController::class, 'update'])->name('user.update');
 
 });

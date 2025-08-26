@@ -25,4 +25,29 @@ class UserController extends Controller
         return redirect()->route('user.create')->with('success', 'Cadastro realizado com sucesso!');
     }
 
+    public function edit()
+    {
+        // Pega o usuário autenticado
+        $user = auth()->user();
+
+        // Retorna a view de edição de perfil com os dados do usuário
+        return view('app.users.edit', compact('user'));
+    }
+
+    public function update(UserRequest $request)
+    {
+        // Pega o usuário autenticado
+        $user = auth()->user();
+
+        // Dados validados
+        $data = $request->validated();
+
+        // Atualiza os dados do usuário
+        $user->update($data);
+
+        // Redireciona com mensagem de sucesso
+        return redirect()->route('user.edit')->with('success', 'Perfil atualizado com sucesso!');
+
+    }
+
 }

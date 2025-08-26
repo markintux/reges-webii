@@ -24,7 +24,7 @@
                         {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                     </ul>
