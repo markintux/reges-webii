@@ -18,4 +18,9 @@ class Reminder extends Model
         'done' => 'boolean',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
