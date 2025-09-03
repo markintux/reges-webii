@@ -15,7 +15,7 @@ class ReminderController extends Controller
     public function index()
     {
         // busca os lembretes com o método paginate
-        $reminders = Reminder::orderBy('remind_at', 'desc')->paginate(3);
+        $reminders = Reminder::orderBy('remind_at', 'desc')->paginate(5);
 
         // retorna a view com os lembretes
         return view('app.reminders.index', compact('reminders'));

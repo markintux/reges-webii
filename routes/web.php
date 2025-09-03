@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\UserController;
@@ -21,5 +22,6 @@ Route::middleware('auth')
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::put('/profile', [UserController::class, 'update'])->name('user.update');
+        Route::resource('categories', CategoryController::class);
 
 });

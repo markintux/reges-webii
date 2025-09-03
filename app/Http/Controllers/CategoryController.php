@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class CategoryController extends Controller
 {
@@ -12,7 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // busca as categorias com o metodo paginate
+        $categories = Category::orderBy('created_at', 'desc')->paginate(5);
+
+        // retorna a view com as categorias
+        return view('app.categories.index', compact('categories'));
     }
 
     /**
@@ -20,15 +26,28 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        // valida a requisição
+        $data = $request->validated();
+
+        // verifica se a image existe e se ela veio por upload
+        if ( isset($data['image']) && $data['image'] instanceof UploadedFile ) {
+            $data['image'] = $data['image']->store('categories', 'public');
+        }
+
+        // grava no banco de dados
+        Category::create($data);
+
+        // redireciona em caso de sucesso
+        return redirect()->route('categories.create')->with('success', 'Categoria cadastrada com sucesso!');
+
     }
 
     /**
